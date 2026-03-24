@@ -7,6 +7,7 @@ export default function SignupPage() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { loading, error } = useSelector((state) => state.auth)
+  const [success, setSuccess] = useState(false)
 
   const [form, setForm] = useState({ name: '', email: '', password: '' })
 
@@ -18,8 +19,10 @@ export default function SignupPage() {
     e.preventDefault()
     const result = await dispatch(signup(form))
     if (result.meta.requestStatus === 'fulfilled') {
-      const role = result.payload.role
-      navigate(role === 'admin' ? '/admin' : '/jobs')
+      setSuccess(true)
+      setTimeout(() => {
+        navigate('/login')
+      }, 2000)
     }
   }
 
@@ -27,6 +30,12 @@ export default function SignupPage() {
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Create Account</h2>
+
+        {success && (
+          <div className="bg-green-100 text-green-700 px-4 py-3 rounded mb-4 text-sm text-center">
+            🎉 Account created! Redirecting to login...
+          </div>
+        )}
 
         {error && (
           <div className="bg-red-100 text-red-700 px-4 py-2 rounded mb-4 text-sm">
@@ -76,7 +85,7 @@ export default function SignupPage() {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || success}
             className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition disabled:opacity-50"
           >
             {loading ? 'Creating account...' : 'Sign Up'}
