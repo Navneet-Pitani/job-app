@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
-const API = 'http://localhost:5000/api'
+const API = 'https://job-app-p42e.onrender.com/api'
 
 const getToken = (thunkAPI) => {
   return thunkAPI.getState().auth.user?.token
