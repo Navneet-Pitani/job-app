@@ -5,12 +5,14 @@ import JobsPage from './features/jobs/JobsPage'
 import AppliedJobsPage from './features/jobs/AppliedJobsPage'
 import AdminDashboard from './features/admin/AdminDashboard'
 import ProtectedRoute from './components/ProtectedRoute'
+import LandingPage from './pages/LandingPage'
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
 
