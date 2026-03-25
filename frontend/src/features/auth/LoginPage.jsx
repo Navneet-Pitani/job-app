@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from './authSlice'
+import { login, clearError } from './authSlice'
 import { useNavigate, Link } from 'react-router-dom'
 
 export default function LoginPage() {
@@ -9,6 +9,12 @@ export default function LoginPage() {
   const { loading, error } = useSelector((state) => state.auth)
 
   const [form, setForm] = useState({ email: '', password: '' })
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearError())
+    }
+  }, [dispatch])
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })

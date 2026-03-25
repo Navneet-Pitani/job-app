@@ -20,9 +20,7 @@ export default function AdminDashboard() {
     dispatch(fetchJobs())
   }, [dispatch])
 
-  const adminJobs = jobs.filter(
-    (job) => job.createdBy === user?._id || job.createdBy?._id === user?._id
-  )
+const adminJobs = jobs
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
